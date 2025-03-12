@@ -1,0 +1,48 @@
+import okhttp3.*;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.util.concurrent.TimeUnit;
+
+public class RotatingProxyExample {
+    public static void main(String[] args) throws InterruptedException {
+        String[] proxies = {
+            "47.252.18.37:45",
+            "47.252.29.28:11222",
+            "102.68.131.31:8080"
+        };
+
+        String targetUrl = "https://youtu.be/DX_1FHxBwPc?si=lnva0YMxPxnwZNDr";
+
+        for (String proxyAddress : proxies) {
+            String[] parts = proxyAddress.split(":");
+            String proxyHost = parts[0];
+            int proxyPort = Integer.parseInt(parts[1]);
+
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
+
+            OkHttpClient client = new OkHttpClient.Builder()
+                .proxy(proxy)
+                .readTimeout(10, TimeUnit.SECONDS)  // Simulates user waiting
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .build();
+
+            Request request = new Request.Builder()
+                .url(targetUrl)
+                .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")  // Mimics real browser
+                .build();
+
+            try (Response response = client.newCall(request).execute()) {
+                System.out.println("Response from " + proxyHost + ": " + response.code());
+            } catch (IOException e) {
+                System.out.println("Failed for proxy: " + proxyHost);
+            }
+
+            // Wait 5-15 seconds before the next request (random delay)
+            int delay = (int) (Math.random() * (15 - 5) + 5);
+            System.out.println("Waiting " + delay + " seconds...");
+            Thread.sleep(delay * 1000);
+        }
+    }
+}
