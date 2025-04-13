@@ -192,7 +192,10 @@ export default function Home() {
         if (response.status !== 200) {
           throw new Error("Something went wrong");
         }
-        console.log(response.data.data);
+
+        
+       // console.log(response.data.token);
+        
         
       setProduct(response.data.data);
       } catch (err) {

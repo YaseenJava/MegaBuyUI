@@ -1,5 +1,5 @@
 import Landing from "./assets/Components/Landing";
-import Sidebar from "./assets/components/Sidebar";
+
 import Navbar from "./assets/components/Navbar";
 import Home from "./assets/Components/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
