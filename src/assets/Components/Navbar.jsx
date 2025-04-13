@@ -12,7 +12,7 @@ export default function Navbar() {
           <Link to="/" className=" text-white font-bold hover:text-gray-300">Home</Link>
           <Link to="/personal" className=" text-white font-bold  hover:text-gray-300">Personal</Link>
           <Link to="/category" className=" hover:text-gray-300">Category</Link>
-           <span className="text-green-500 font-bold">500 Points</span>
+           {/* <span className="text-green-500 font-bold">500 Points</span> */}
         </div>
       </div>
     </nav>
