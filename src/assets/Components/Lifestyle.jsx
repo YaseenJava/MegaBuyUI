@@ -53,7 +53,7 @@ export default function Home() {
   //   return <h1>Oops! {error}</h1>;
   // }
   const ads = [
-    { imgUrl: "https://www.lakmeindia.com/cdn/shop/files/Lakme_Mobile-VitC-2_71bb67c8-9dd0-4daa-9aa5-8a326deb6a20.png?v=1718629947", text: "50% Off Sale!", url: "#" },
+    { imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfB980UwsNJtMPK-czqa2yJ-RmQIONacNI-w&s", text: "50% Off Sale!", url: "#" },
     { imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6_we8EYhJFw4efPWBu2UkoB4MCHxmrcEc1w&s", text: "Get Cashback Now", url: "#" },
     { imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yzokVlQLn9FYCcTPK6nGaHmfkzjluT8EgQ&s", text: "Get Cashback Now", url: "#" },
 

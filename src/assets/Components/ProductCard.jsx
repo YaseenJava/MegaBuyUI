@@ -1,84 +1,50 @@
-// import { useState,useEffect } from "react"
-// export default function ProductCard ({ product }){
-//   const [userActivity, setUserActivity] = useState([]);
-//   const [imgSrc,setImg]=useState('');
-//   //const [count,setCount]=useState('');
-//   // useEffect(() => {
-//   //   if (product.data) {
-//   //     const url = URL.createObjectURL(product.data);
-//   //     setImg(url);
-      
-      
-//   //     return () => URL.revokeObjectURL(url);
-//   //   }
-//   // }, [product.data]); 
-
-
-
-//   var count=0;
-//   var productlink='';
-//  const handleVisit = (product) => {
-//    setUserActivity((prevActivity) => [...prevActivity, product]);
-//     window.location.href=product.link;
-//     if(product.url!=productlink){
-//      count=count+1;
-//       console.log(count);
-//      productlink=product.url;
-//     }
-//  };
-//   //console.log(userActivity)
-//   //console.log(product.link)
-//   //console.log(count)
-//     return<>
-//     <div className="bg-gray shadow-lg rounded-lg p-4 transform transition duration-300 hover:scale-105">
-//       <img src={product.imgUrl} alt={product.name} className="w-full h-40 object-cover rounded-md" />
-//       <h3 className="text-xl font-bold mt-2">{product.name}</h3>
-//       <p className="text-gray-600">{product.description}</p>
-//       <a href={product.url} onClick={(e) => handleVisit(product)} className="mt-3 inline-block bg-yellow-400 w-full text-white px-4 py-2 rounded-lg hover:bg-blue-500 hover:text-black">Visit</a>
-//     </div>
-//     </>
-// }
-  
-
-
-import { useState, useEffect, useRef } from "react";
-
+import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 export default function ProductCard({ product }) {
   const [userActivity, setUserActivity] = useState([]);
   const [count, setCount] = useState(0);
-  const productLinkRef = useRef(""); // Store last visited product URL
+  const productLinkRef = useRef("");
 
   const handleVisit = (e, product) => {
-    e.preventDefault(); // Stop default link navigation
-
+    e.preventDefault();
     setUserActivity((prevActivity) => [...prevActivity, product]);
 
     if (product.url !== productLinkRef.current) {
-      setCount((prevCount) => prevCount + 1);
+      setCount((prev) => prev + 1);
       console.log("New visit count:", count + 1);
       productLinkRef.current = product.url;
     }
 
-  
-    window.location.href = product.url;
+    window.open(product.url, "_blank");
   };
-
+  
   return (
-    <div className="bg-gray shadow-lg rounded-lg p-4 transform transition duration-300 hover:scale-105">
-      <img src={product.imgUrl} alt={product.name} className="w-full h-40 object-cover rounded-md" />
-      <h3 className="text-xl font-bold mt-2">{product.name}</h3>
-      <p className="text-gray-600">{product.description}</p>
-      {/* <p className="text-blue-500">Coins Earned: {count}</p> */}
-      <a
-        href={product.url}
-        onClick={(e) => handleVisit(e, product)}
-        target="_blank"
-        rel="noopener noreferrer"
+    <div className="max-w-sm w-full bg-white shadow-xl rounded-2xl overflow-hidden transform transition hover:scale-105 duration-300">
+      
+    
+      <Link to={`/ProductView/${product.id}`}>
+        <div className="relative h-48 overflow-hidden">
+          <img
+            src={product.imgUrl}
+            alt={product.name}
+            className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
+          />
+        </div>
+      </Link>
+      <div className="p-4">
+        <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
+        <p className="text-gray-500 mt-1 text-sm line-clamp-2">{product.description}</p>
 
-        className="mt-3 inline-block bg-yellow-400 w-full text-white px-4 py-2 rounded-lg hover:bg-blue-500 hover:text-black"
-      >
-        Visit
-      </a>
+        {/* Optional badge or price */}
+        {/* <span className="text-green-600 font-bold text-md mt-2 block">$19.99</span> */}
+
+        <button
+          onClick={(e) => handleVisit(e, product)}
+          className="mt-4 w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-blue-500 hover:to-blue-600 text-white font-semibold py-2 rounded-lg transition-colors duration-300"
+        >
+           Visit Now
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,11 +1,23 @@
 import Navbar from "./Navbar";
 import Home from "./Home";
-//import Login from "./LoggedUser";
+import {useLocation} from "react-router-dom"
+import Entertain from "./Entertain"
+import Foods from "./Foods"
+
 export default function pages(){
+    const location=useLocation();
+  const section=location.pathname
+  console.log(section)
+
     return<>
    
     <Navbar/>
-    <Home/>
+    
+    {section === "/Entertain" ? <Entertain /> : <Home />}
+    {section === "/Foods" ? <Foods /> : <Home />}
+
+
+    
 
     
     </>

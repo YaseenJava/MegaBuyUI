@@ -14,16 +14,35 @@ export default function Home() {
   const [userActivity, setUserActivity] = useState([]);
   const [error, setError] = useState(null);
 
-  const fallbackProducts = [
-    { id: 1, name: "Smartphone", desc: "Latest 5G smartphone.", link: "#", image: "https://lalithatraders.com/wp-content/uploads/2023/10/Vivo-T2-Pro-5G-Mobile-Phone-New-Moon-Black.jpg" },
-    { id: 2, name: "Laptop", desc: "Powerful gaming laptop.", link: "#", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMKseBU0IA-ebm2KTxop_7QQoYfc_J6VVeqw&s" },
-    { id: 3, name: "Headphones", desc: "Noise-cancelling wireless.", link: "#", image: "https://cdn.moglix.com/p/VDHEszRlLxUL8-xxlarge.jpg" },
+  const fallbackMeals = [
+    {
+      id: 1,
+      name: "Butter Chicken",
+      desc: "Creamy tomato-based curry with tender chicken pieces.",
+      link: "#",
+      imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9k3aQ9aF-SoTeZrZOdkv5FL9A_Pfw2ghUJQ&s"
+    },
+    {
+      id: 2,
+      name: "Paneer Biryani",
+      desc: "Fragrant basmati rice layered with spicy paneer masala.",
+      link: "#",
+      imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfNMYsE3P2Q1cuZzjh6igftp8Dr2AqC0Jwcg&s"
+    },
+    {
+      id: 3,
+      name: "Cheese Burst Pizza",
+      desc: "Loaded with cheese and toppings, perfect for pizza lovers.",
+      link: "#",
+      imgUrl: "https://content.jdmagicbox.com/comp/def_content/pizza_outlets/default-pizza-outlets-13.jpg"
+    }
   ];
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/product/productInfo");
+       // const response = await axios.get("http://localhost:8080/product/productInfo");
         if (response.status !== 200) {
           throw new Error("Something went wrong");
         }
@@ -35,7 +54,7 @@ export default function Home() {
       setProduct(response.data.data);
       } catch (err) {
         setError(err.message);
-        setProduct(fallbackProducts); // Use fallback products if API fails
+        setProduct(fallbackMeals); // Use fallback products if API fails
       } finally {
         setLoading(false);
       }
@@ -53,14 +72,11 @@ export default function Home() {
   //   return <h1>Oops! {error}</h1>;
   // }
   const ads = [
-    { imgUrl: "https://www.lakmeindia.com/cdn/shop/files/Lakme_Mobile-VitC-2_71bb67c8-9dd0-4daa-9aa5-8a326deb6a20.png?v=1718629947", text: "50% Off Sale!", url: "#" },
-    { imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6_we8EYhJFw4efPWBu2UkoB4MCHxmrcEc1w&s", text: "Get Cashback Now", url: "#" },
-    { imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yzokVlQLn9FYCcTPK6nGaHmfkzjluT8EgQ&s", text: "Get Cashback Now", url: "#" },
+    { imgUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/0fdd0e25559501.56347a238b44b.png", text: "Hot selling", url: "#" },
+    { imgUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/e9eec5183336727.653e32340bec9.jpg", text: "Get Cashback Now", url: "#" },
+    { imgUrl: "https://cdn.create.vista.com/downloads/fdce49aa-e21e-4159-8905-7e56b5a53cde_1024.jpeg", text: "Get Cashback Now", url: "#" },
 
-    { imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMCrG9AH8X1d_RCGr1iJ8FgieGfiifCnlbqw&s", text: "Get Cashback Now", url: "#" },
-
-    { imgUrl: "https://dazeinfo.com/wp-content/uploads/2021/07/Apple-ad-privacy.jpeg", text: "Get Cashback Now", url: "#" },
-
+   
     
   ];
 

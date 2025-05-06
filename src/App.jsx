@@ -1,6 +1,6 @@
 import Landing from "./assets/Components/Landing";
 
-import Navbar from "./assets/components/Navbar";
+
 import Home from "./assets/Components/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Personal from "./assets/Components/Personal";
@@ -8,7 +8,13 @@ import HomeScreen from "./assets/Components/HomeScreen";
 import Login from "./assets/Components/Login";
 import Register from "./assets/Components/Register"
 import Pages from "./assets/Components/Pages";
+import ProductPage from "./assets/Components/ProductPage";
+import Lifestyle from "./assets/Components/Lifestyle"
+import Entertain from "./assets/Components/Entertain"
+import Foods from "./assets/Components/Foods"
+
 export default function App() {
+  
   return (
 
     <Router>
@@ -28,6 +34,12 @@ export default function App() {
       <Route path="/personal" element={<Personal/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
+      <Route path="/productView/*" element={<ProductPage/>}/>
+      {/* <Route path="/Lifestyle" element={<Lifestyle/>}/>*/}
+      <Route path="/Foods" element={<Foods/>}/> 
+      <Route path="/Entertain" element={<Entertain/>}/> 
+
+
       </Routes>
     </Router>
   );
