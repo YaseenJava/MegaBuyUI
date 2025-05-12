@@ -23,7 +23,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/product/productInfo");
+        const response = await axios.get("http://localhost:8080/product/productByCategory/Lifestyle");
         if (response.status !== 200) {
           throw new Error("Something went wrong");
         }

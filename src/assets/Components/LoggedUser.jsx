@@ -15,7 +15,7 @@ export default function LoggedUser({ children, user }) {
       setUserInfo(user);
     }
   }, [user]);
-
+console.log(userInfo)
   return (
     <Logged.Provider value={{ userInfo, setUserInfo }}>
       {children}

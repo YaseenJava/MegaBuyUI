@@ -7,15 +7,15 @@ import Foods from "./Foods"
 export default function pages(){
     const location=useLocation();
   const section=location.pathname
-  console.log(section)
+  //console.log(section)
 
     return<>
    
     <Navbar/>
-    
-    {section === "/Entertain" ? <Entertain /> : <Home />}
+  
+    {section === "/Entertain" ? <Entertain /> : <pages/>}
     {section === "/Foods" ? <Foods /> : <Home />}
-
+    
 
     
 
