@@ -25,31 +25,27 @@ const Login = () => {
     form.append("password", password);
 
     try {
-      const response = await axios.post("http://localhost:8080/check", form,
-        {headers:{ "Content-Type": "application/json" }},
- 
-       );
-       if (response.status !== 200) {
-        throw new Error("Something went wrong");
-      }
-      //const token = response.data.token;
-      //const data=response.data;
-      setData(data); //data.user //data.email //data.reward
-      console.log(response);
-      
-      <LoggedUser user={data} />
-      if(data.email==response.data.email){
-      window.location.href = "http://localhost:5173/home";
-      }
-      
-    }catch (err) {
-      console.log("Error:", err.message);
+  const response = await axios.post("http://localhost:8080/check", form, {
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.status === 200) {
+    const user = response.data.data;
+    setData(user); // store user
+    console.log("User logged in:", user);
+    if (user.email==email) {
+          window.location.href = "http://localhost:5173/home";
+
     }
-  };
+  }
+} catch (err) {
+  console.log("Error:", err.message);
+};
+  }
 
   const handleGoogleLogin = () => {
     alert("Logging in with Google.....");
-    window.location.href = "http://localhost:8080/auth/loginOauth";
+    window.location.href = "http://localhost:8080/googleLogin";
   };
 
   return (

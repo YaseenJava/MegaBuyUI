@@ -1,24 +1,30 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const Logged = createContext();
 
 export default function LoggedUser({ children, user }) {
   const [userInfo, setUserInfo] = useState({
     userName: "",
-    reward: "",
+    reward: 0,
     userEmail: "",
   });
 
-  // Update state only if user changes
-  useState(() => {
+  useEffect(() => {
     if (user) {
-      setUserInfo(user);
+      // Match these with actual keys in your `user` object
+      setUserInfo({
+        userName: user.userName || "",
+        reward: user.reward || 0,
+        userEmail: user.email || "", // make sure you're using the correct key
+      });
     }
   }, [user]);
-console.log(userInfo)
+
   return (
     <Logged.Provider value={{ userInfo, setUserInfo }}>
       {children}
     </Logged.Provider>
   );
 }
+
+export { Logged };
