@@ -2,29 +2,24 @@ import { createContext, useState, useEffect } from "react";
 
 const Logged = createContext();
 
-export default function LoggedUser({ children, user }) {
-  const [userInfo, setUserInfo] = useState({
-    userName: "",
-    reward: 0,
-    userEmail: "",
-  });
+export default function LoggedUser({ children }) {
+  const [user, setUser] = useState({});
+    useEffect(() => {
+    const stored = localStorage.getItem("user");
+    if (stored) setUser(JSON.parse(stored));
+  }, []);
 
   useEffect(() => {
-    if (user) {
-      // Match these with actual keys in your `user` object
-      setUserInfo({
-        userName: user.userName || "",
-        reward: user.reward || 0,
-        userEmail: user.email || "", // make sure you're using the correct key
-      });
-    }
+    if (user) localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
+   console.log("contex",user)
+
 
   return (
-    <Logged.Provider value={{ userInfo, setUserInfo }}>
+    <Logged.Provider value={{ user, setUser }}>
       {children}
     </Logged.Provider>
   );
 }
 
-export { Logged };
+export { Logged ,LoggedUser};

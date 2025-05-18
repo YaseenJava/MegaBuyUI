@@ -1,56 +1,52 @@
-import React, { Children, createContext, useState } from "react";
+
+import React, { useContext, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaGoogle } from "react-icons/fa";
-import LoggedUser from "./LoggedUser";
+import { Logged } from "./LoggedUser";
 
-const Logged=createContext(null)
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const context = useContext(Logged);
+
+  if (!context) {
+    console.error("Logged context is undefined. Make sure <LoggedUser> wraps your app.");
+    return null;
+  }
+
+  const { setUser } = context;
+
+  const [email, setEmail]=useState("");
   const [password, setPassword] = useState("");
-  const [data, setData] = useState({
-    userName:"",
-    reward:"",
-    userEmail:""
-
-  });
-
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Logging in:", email, password);
-    
-    const form = new FormData();
-    form.append("email", email);
-    form.append("password", password);
 
     try {
-  const response = await axios.post("http://localhost:8080/check", form, {
-    headers: { "Content-Type": "application/json" },
-  });
+      const response = await axios.post(
+        "http://localhost:8080/check",
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
 
-  if (response.status === 200) {
-    const user = response.data.data;
-    setData(user); // store user
-    console.log("User logged in:", user);
-    if (user.email==email) {
-          window.location.href = "http://localhost:5173/home";
-
+      if (response.status === 200) {
+        const userData = response.data.data;
+        setUser(userData); 
+       
+       // console.log(user);
+        console.log("User logged in:", userData);
+         navigate("/home");
+      }
+    } catch (err) {
+      console.error("Login error:", err.message);
     }
-  }
-} catch (err) {
-  console.log("Error:", err.message);
-};
-  }
+  };
 
   const handleGoogleLogin = () => {
-    alert("Logging in with Google.....");
     window.location.href = "http://localhost:8080/googleLogin";
   };
 
   return (
-    // <Logged.Provider value={{ data, setData }}>
-    //   {Children}
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-l from-blue-600 to-yellow-400 px-4">
       <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">Login</h2>
@@ -106,7 +102,6 @@ const Login = () => {
         </div>
       </div>
     </div>
-   // </Logged.Provider>
   );
 };
 
