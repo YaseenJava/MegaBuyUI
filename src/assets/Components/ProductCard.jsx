@@ -48,15 +48,17 @@
 //     </div>
 //   );
 // }
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Logged } from "./LoggedUser";
 
 export default function ProductCard({ product }) {
+
   const [userActivity, setUserActivity] = useState([]);
   const [coins, setCoins] = useState(0);
   const [lastClaimTimes, setLastClaimTimes] = useState({});
   const productLinkRef = useRef("");
-
+  const {setUser,user}=useContext(Logged);
   const handleVisit = (e, product) => {
     e.preventDefault();
 
@@ -68,7 +70,16 @@ export default function ProductCard({ product }) {
       const earnedCoins = Math.floor(Math.random() * 10) + 1; // 1–10 coins
       setCoins(prev => prev + earnedCoins);
       alert(`You earned ${earnedCoins} coins! 🎉`);
-      
+
+      if (user.rewards == null) {
+           user.rewards = 0;
+           console.log("bnjh");
+      }
+
+
+       user.rewards += earnedCoins;
+       console.log(user.rewards);
+
       setLastClaimTimes(prev => ({
         ...prev,
         [product.id]: now.toISOString()
@@ -86,6 +97,8 @@ export default function ProductCard({ product }) {
     }
 
     window.open(product.url, "_blank");
+    //setUser(earnedCoins);
+    console.log(user);
   };
 
   return (
