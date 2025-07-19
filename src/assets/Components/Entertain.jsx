@@ -121,15 +121,15 @@ imgUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7jLS0g4saupC2GU53
   ];
 
   return (
-  <div>
+  <div className="w-full">
             <Navbar/>
   
             <SliderSection ads={ads} />
             <Section/>
   
-      <div className="lg:p-[50px] lg:ml-7 lg:mt-[1px] w-[200px] ml-0 flex flex-wrap justify-center gap-4">
+      <div className=" w-[100%] lg:p-[20px] lg:ml-7 lg:mt-[1px] w-[200px] ml-0">
         
-        <div className="w-screen container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 w-screen pl-[10px]">
+        <div className=" container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 w-screen pl-[10px]">
         {Array.isArray(product) && product.length > 0 ? (
           product.map((prod) => <ProductCard key={prod.id} product={prod} />)
         ) : (
