@@ -5,7 +5,8 @@ import axios from "axios";
 import SliderSection from "./SliderSection"
 import {Link, useLocation} from "react-router-dom"
 import Section from "./Section"
-
+import Navbar from "./Navbar"
+import ProductSkelton from "./ProductSkelton";
 
 
 export default function Home() {
@@ -93,7 +94,7 @@ imgUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7jLS0g4saupC2GU53
 
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <ProductSkelton/>;
   }
 
   // if (error) {
@@ -120,20 +121,22 @@ imgUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7jLS0g4saupC2GU53
   ];
 
   return (
-    <div>
-          <SliderSection ads={ads} />
-          <Section/>
-
-    <div className="lg:p-[50px] lg:ml-7 lg:mt-[1px] w-[200px] ml-0">
-      
-      <div className="w-screen container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 w-screen pl-[0px]">
-      {Array.isArray(product) && product.length > 0 ? (
-        product.map((prod) => <ProductCard key={prod.id} product={prod} />)
-      ) : (
-        <p>No products available</p> 
-      )}
+  <div>
+            <Navbar/>
+  
+            <SliderSection ads={ads} />
+            <Section/>
+  
+      <div className="lg:p-[50px] lg:ml-7 lg:mt-[1px] w-[200px] ml-0 flex flex-wrap justify-center gap-4">
+        
+        <div className="w-screen container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 w-screen pl-[10px]">
+        {Array.isArray(product) && product.length > 0 ? (
+          product.map((prod) => <ProductCard key={prod.id} product={prod} />)
+        ) : (
+          <p>No products available</p> 
+        )}
+        </div>
       </div>
-    </div>
-    </div>
+      </div>
   );
 }

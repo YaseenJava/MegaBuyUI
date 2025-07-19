@@ -7,7 +7,6 @@ import Personal from "./assets/Components/Personal";
 import HomeScreen from "./assets/Components/HomeScreen";
 import Login from "./assets/Components/Login";
 import Register from "./assets/Components/Register"
-import Pages from "./assets/Components/Pages";
 import ProductPage from "./assets/Components/ProductPage";
 import Lifestyle from "./assets/Components/Lifestyle"
 import Entertain from "./assets/Components/Entertain"
@@ -28,7 +27,7 @@ export default function App() {
       {/* <Route path="/personal" element={<Account/>}
       <Route path="/category" element={<Category />} /> */}
       
-      <Route path="/home" element={<Pages/>} />
+      <Route path="/home" element={<Home/>} />
 
       <Route path="/about" element={<Landing />} />
       <Route path="/personal" element={<Personal/>} />

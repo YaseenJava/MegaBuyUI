@@ -5,7 +5,7 @@ import { Menu, X, Gift, User, LogOut } from "lucide-react";
 export default function Navbar() {
   
   return<>
-    <nav className="bg-gradient-to-l from-blue-500 to-yellow-400 p-4 shadow-lg text-white w-screen lg:absolute lg:top-0">
+    <nav className="bg-gradient-to-l from-blue-500 to-yellow-400 p-4 shadow-lg text-white w-[100%] lg:absolute lg:top-0">
       <div className="container mx-auto flex justify-between items-center">
         {/* <h4 className="text-1xl font-bold">Mega Buy</h4> */}
         <div className="space-x-6">

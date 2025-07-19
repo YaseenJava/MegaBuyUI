@@ -5,7 +5,8 @@ import axios from "axios";
 import SliderSection from "./SliderSection"
 import {Link, useLocation} from "react-router-dom"
 import Section from "./Section"
-
+import Navbar from "./Navbar"
+import ProductSkelton from "./ProductSkelton";
 
 
 export default function Home() {
@@ -52,6 +53,7 @@ export default function Home() {
         
         
       setProduct(response.data.data);
+      console.log(response.data.data)
       } catch (err) {
         setError(err.message);
         setProduct(fallbackMeals); // Use fallback products if API fails
@@ -65,7 +67,7 @@ export default function Home() {
 
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <ProductSkelton/>;
   }
 
   // if (error) {
@@ -82,19 +84,21 @@ export default function Home() {
 
   return (
     <div>
-          <SliderSection ads={ads} />
-          <Section/>
-
-    <div className="lg:p-[50px] lg:ml-7 lg:mt-[1px] w-[200px] ml-0">
-      
-      <div className="w-screen container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 w-screen pl-[0px]">
-      {Array.isArray(product) && product.length > 0 ? (
-        product.map((prod) => <ProductCard key={prod.id} product={prod} />)
-      ) : (
-        <p>No products available</p> 
-      )}
-      </div>
-    </div>
-    </div>
-  );
+              <Navbar/>
+    
+              <SliderSection ads={ads} />
+              <Section/>
+    
+        <div className="lg:p-[50px] lg:ml-7 lg:mt-[1px] w-[200px] ml-0">
+          
+          <div className="w-screen container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 w-screen pl-[10px]">
+          {Array.isArray(product) && product.length > 0 ? (
+            product.map((prod) => <ProductCard key={prod.id} product={prod} />)
+          ) : (
+            <p>No products available</p> 
+          )}
+          </div>
+        </div>
+        </div>
+          );
 }

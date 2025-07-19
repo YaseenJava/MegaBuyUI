@@ -5,8 +5,8 @@ import axios from "axios";
 import SliderSection from "./SliderSection"
 import {Link, useLocation} from "react-router-dom"
 import Section from "./Section"
-
-
+import Navbar from "./Navbar"
+import ProductSkelton from "./ProductSkelton";
 
 export default function Home() {
   const [product, setProduct] = useState([]);
@@ -46,18 +46,18 @@ export default function Home() {
 
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <ProductSkelton/>;
   }
 
   // if (error) {
   //   return <h1>Oops! {error}</h1>;
   // }
   const ads = [
-    { imgUrl: "https://www.lakmeindia.com/cdn/shop/files/Lakme_Mobile-VitC-2_71bb67c8-9dd0-4daa-9aa5-8a326deb6a20.png?v=1718629947", text: "50% Off Sale!", url: "#" },
-    { imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6_we8EYhJFw4efPWBu2UkoB4MCHxmrcEc1w&s", text: "Get Cashback Now", url: "#" },
-    { imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yzokVlQLn9FYCcTPK6nGaHmfkzjluT8EgQ&s", text: "Get Cashback Now", url: "#" },
+    { imgUrl: "https://img.freepik.com/premium-photo/cosmetics-makeup-products-woman-with-skincare-products-beauty-product-cosmetics-advertising_265223-82563.jpg", text: "50% Off Sale!", url: "#" },
+    { imgUrl: "https://www.gingermediagroup.com/wp-content/uploads/2023/04/unnamed-19.jpg", text: "Get Cashback Now", url: "#" },
+    { imgUrl: "https://www.shutterstock.com/image-photo/happiness-calm-dreaminess-collage-made-600nw-2290214985.jpg", text: "Get Cashback Now", url: "#" },
 
-    { imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMCrG9AH8X1d_RCGr1iJ8FgieGfiifCnlbqw&s", text: "Get Cashback Now", url: "#" },
+    { imgUrl: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/headphone-ads-design-template-7fe6b8c54d38cf99a83aac13e0f79352_screen.jpg?ts=1635073389", text: "Get Cashback Now", url: "#" },
 
     { imgUrl: "https://dazeinfo.com/wp-content/uploads/2021/07/Apple-ad-privacy.jpeg", text: "Get Cashback Now", url: "#" },
 
@@ -65,13 +65,16 @@ export default function Home() {
   ];
 
   return (
-    <div>
+
+    <div className="w-full">
+          <Navbar/>
+
           <SliderSection ads={ads} />
           <Section/>
 
-    <div className="lg:p-[50px] lg:ml-7 lg:mt-[1px] w-[200px] ml-0">
+    <div className=" w-[100%] lg:p-[20px] lg:ml-7 lg:mt-[1px] w-[200px] ml-0">
       
-      <div className="w-screen container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 w-screen pl-[0px]">
+      <div className=" container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 w-screen pl-[10px]">
       {Array.isArray(product) && product.length > 0 ? (
         product.map((prod) => <ProductCard key={prod.id} product={prod} />)
       ) : (
@@ -82,3 +85,26 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+
+
+
+//     <div className="bg-black min-h-screen w-[100%] p-5">
+//   <Navbar />
+//   <SliderSection ads={ads} />
+//   <Section />
+
+//   <div className="container mx-auto">
+//     {Array.isArray(product) && product.length > 0 ? (
+//       <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6  px-6 py-4">
+//         {product.map((prod) => (
+//           <ProductCard key={prod.id} product={prod} />
+//         ))}
+//       </div>
+//     ) : (
+//       <p className="text-center text-gray-500 mt-10 text-lg">No products available</p>
+//     )}
+//   </div>
+// </div>
