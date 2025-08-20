@@ -26,16 +26,17 @@ const Login = () => {
       const response = await axios.post(
         "http://localhost:8080/check",
         { email, password },
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type":"application/json" } }
       );
 
       if (response.status === 200) {
         const userData = response.data.data;
+        //console.log(response.data.data);
         setUser(userData); 
        
        // console.log(user);
         console.log("User logged in:", userData);
-         navigate("/home");
+        navigate("/home");
       }
     } catch (err) {
       console.error("Login error:", err.message);
@@ -46,14 +47,16 @@ const Login = () => {
     window.location.href = "http://localhost:8080/googleLogin";
   };
 
-  return (
+  return(
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-l from-blue-600 to-yellow-400 px-4">
       <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">Login</h2>
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="flex items-center border border-gray-300 rounded-lg p-2 bg-gray-100">
+
             <FaUser className="text-gray-500 mr-2" />
+            
             <input
               type="text"
               placeholder="Email id"

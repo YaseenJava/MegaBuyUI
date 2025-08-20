@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function AuthPage() {
   return (
+    
     <div
       className="min-h-screen flex flex-col justify-center items-center bg-cover bg-center p-6 w-screen relative"
       style={{

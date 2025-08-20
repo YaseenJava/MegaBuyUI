@@ -62,7 +62,7 @@ export default function Section() {
   const section = location.pathname;
 
   const links = [
-    { name: "Lifestyle", path: "/Lifestyle" },
+    { name: "Home", path: "/home" },
     { name: "Foods", path: "/Foods" },
     { name: "Entertain", path: "/Entertain" },
     { name: "Grocery", path: "/Grocery" },

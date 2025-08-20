@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from "axios";
 import Navbar from './Navbar';
-import SliderSection from "./SliderSection"
+
 export default function ProductPage() {
     const [product, setProduct] = useState({});
     const location = useLocation();
     const id = location.pathname.split("ProductView/")[1];
     // console.log(id);
     //console.log(location.pathname);
-    const shareUrl = "https://localhost;5173/" + location.pathname;
+    const shareUrl = "https://localhost:5173/" + location.pathname;
     const message = encodeURIComponent("Check this out!");
     const fbShare = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
     const waShare = `https://wa.me/?text=${message}%20${shareUrl}`;
@@ -39,11 +39,8 @@ export default function ProductPage() {
         fetchData();
     }, []);
 
-    const ads = [
-        { imgUrl: "https://via.placeholder.com/150/FFCC00", text: "50% Off Sale!", url: "#" },
-        { imgUrl: "https://via.placeholder.com/150/66FF99", text: "Get Cashback Now", url: "#" },
-      ];
     
+
 
     return (
         
